@@ -470,25 +470,11 @@ The repository includes `scripts/install.sh`, which:
 5. runs CMake
 6. compiles the project
 
-### Linux or HPC environments
+Usage:
 
 ```bash
-chmod +x scripts/install.sh
+(sudo) chmod +x scripts/install.sh
 ./scripts/install.sh
-```
-
-### Important macOS note
-
-The provided `install.sh` script uses `nproc` to determine the number of build threads. This is common on Linux, but `nproc` is not available by default on macOS. On macOS, the recommended path is the **manual build** flow shown below, or a small local edit replacing:
-
-```bash
-nproc
-```
-
-with:
-
-```bash
-sysctl -n hw.ncpu
 ```
 
 ### What the script builds
@@ -496,12 +482,12 @@ sysctl -n hw.ncpu
 By default, the project currently declares:
 
 - `ENABLE_LOGGING=ON`
-- `ENABLE_TESTS=ON`
-- `ENABLE_DEBUG=ON`
+- `ENABLE_TESTS=OFF`
+- `ENABLE_DEBUG=OFF`
 - `ENABLE_CUDA=ON`
 - `ENABLE_COVERAGE=OFF`
 
-So on a machine without CUDA support, the default script may not be the best entry point. In that case, use a manual CPU-only configuration.
+So on a machine without CUDA support, the default script may not be the best entry point. In that case, change the default variable in the CMakeLists.txt file or use a manual CPU-only configuration.
 
 ---
 
@@ -510,7 +496,7 @@ So on a machine without CUDA support, the default script may not be the best ent
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/marcotallone/instagram-filters-CUDA.git
 cd instagram-filters-CUDA
 ```
 
@@ -525,10 +511,10 @@ cd build
 
 #### CPU-only build
 
-This is the safest option on macOS or on systems without a supported NVIDIA CUDA installation.
+This is the safest option on systems without a supported NVIDIA CUDA installation.
 
 ```bash
-cmake -DENABLE_CUDA=OFF -DENABLE_TESTS=ON -DENABLE_DEBUG=ON ..
+cmake -DENABLE_CUDA=OFF ..
 ```
 
 #### CPU + GPU build
@@ -536,18 +522,12 @@ cmake -DENABLE_CUDA=OFF -DENABLE_TESTS=ON -DENABLE_DEBUG=ON ..
 Use this only on systems with a working CUDA toolchain.
 
 ```bash
-cmake -DENABLE_CUDA=ON -DENABLE_TESTS=ON -DENABLE_DEBUG=ON ..
+cmake -DENABLE_CUDA=ON ..
 ```
 
 ### 4. Build
 
-#### macOS
-
-```bash
-cmake --build . -j "$(sysctl -n hw.ncpu)"
-```
-
-#### Linux
+After configuration, build the project with:
 
 ```bash
 cmake --build . -j "$(nproc)"
@@ -555,7 +535,7 @@ cmake --build . -j "$(nproc)"
 
 ### 5. Produced executables
 
-Build artifacts are written to the repository `bin/` directory:
+Executables are written to the repository `bin/` directory:
 
 - `bin/instagram_filters`
 - `bin/instagram_filtersGPU` when CUDA is enabled
@@ -573,8 +553,8 @@ The build is intentionally configurable. The main options exposed by `CMakeLists
 | Option            | Default | Meaning                                           |
 | ----------------- | ------: | ------------------------------------------------- |
 | `ENABLE_LOGGING`  |    `ON` | Enables `spdlog`-based logging                    |
-| `ENABLE_TESTS`    |    `ON` | Builds and registers Google Test targets          |
-| `ENABLE_DEBUG`    |    `ON` | Uses debug-oriented compiler flags                |
+| `ENABLE_TESTS`    |   `OFF` | Builds and registers Google Test targets          |
+| `ENABLE_DEBUG`    |   `OFF` | Uses debug-oriented compiler flags                |
 | `ENABLE_CUDA`     |    `ON` | Enables CUDA language support and GPU targets     |
 | `ENABLE_COVERAGE` |   `OFF` | Enables coverage instrumentation for test targets |
 
@@ -681,10 +661,12 @@ If arguments are omitted, the parser uses:
 
 ### Behavior notes
 
-- invalid filters cause the program to print an error and exit
-- unknown arguments also cause an immediate error
-- unsupported file extensions are skipped
-- output directories are created automatically if needed
+> [!WARNING]
+>
+> - invalid filters cause the program to print an error and exit
+> - unknown arguments also cause an immediate error
+> - unsupported file extensions are skipped
+> - output directories are created automatically if needed
 
 ---
 
@@ -725,7 +707,6 @@ This loads images from `images/input`, applies the grayscale filter, and writes 
 ### Use the provided helper script
 
 ```bash
-chmod +x scripts/runCPU.sh
 ./scripts/runCPU.sh
 ```
 
@@ -756,7 +737,6 @@ The helper script runs multiple filters sequentially on `images/input` and write
 ### Use the provided GPU helper script
 
 ```bash
-chmod +x scripts/runGPU.sh
 ./scripts/runGPU.sh
 ```
 
@@ -842,7 +822,6 @@ images/flowers/
 ### Run the dataset script
 
 ```bash
-chmod +x scripts/download.sh
 ./scripts/download.sh
 ```
 

@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.26)
 ################################################################################
 
 option(ENABLE_LOGGING "Enable file logging" ON)
-option(ENABLE_TESTS "Build unit tests" ON)
-option(ENABLE_DEBUG "Enable debug mode" ON)
+option(ENABLE_TESTS "Build unit tests" OFF)
+option(ENABLE_DEBUG "Enable debug mode" OFF)
 option(ENABLE_CUDA "Enable compilation with CUDA" ON)
 option(ENABLE_COVERAGE "Enable code coverage reporting" OFF)
 
