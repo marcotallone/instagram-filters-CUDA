@@ -1,0 +1,41 @@
+Project Overview: GPU-Accelerated Instagram Filters
+
+Project Description and Characteristics
+
+This project implements an "Instagram-like" image processing pipeline capable of applying various visual filters (Grayscale, Sepia, and Brightness) to images. Its defining characteristic is the dual-pipeline architecture: it provides both a purely sequential CPU implementation and a highly parallelized GPU implementation.
+
+The software is designed to be a command-line tool where users can seamlessly parse input directories, apply selected filters, and output the processed images. It boasts an extensible, modular architecture separated into distinct logical units: file I/O, command-line parsing, logging, CPU filtering, and GPU filtering.
+
+Frameworks and Libraries Used
+
+I used mainly the following frameworks and libraries:
+
+- **C++17 & CUDA**: The core programming languages.
+- **STB Libraries (`stb_image`, `stb_image_write`)**: Used for lightweight, dependency-free image loading and saving. Supported formats were solidified to PNG, JPG, and JPEG.
+- **spdlog**: Integrated for robust, leveled console and file logging (Debug, Info, Error).
+- **Google Test (GTest)**: Utilized for a comprehensive suite of unit tests, verifying everything from I/O boundaries to exact pixel math on both CPU and GPU.
+- **NVIDIA Performance Primitives (NPP)**: Specifically leveraged in the GPU Brightness filter for highly optimized, hardware-accelerated memory and arithmetic operations with native saturation casting.
+- **CMake**: The backbone of the build system, handling dependency fetching, conditional compilation, and target generation.
+
+The Building Process and Technicalities
+
+The build process is managed by a highly configurable CMakeLists.txt file, which allows toggling of tests, logging, coverage, and CUDA support. Several technical hurdles were encountered and resolved during development:
+
+- **Separation of Host and Device Code**: One of the main challenges was ensuring C++ compilers (like GCC) did not encounter CUDA specific syntax (such as the `<<<...>>>` kernel execution configuration). This required strict architectural boundaries, moving all kernel declarations, memory management (`cudaMalloc`, `cudaMemcpy`), and execution logic into isolated `.cu` and `.cuh` files.
+- **Circular Dependencies**: Refactoring headers required careful management of `#include` directives and forward declarations to prevent circular dependencies between memory management structures and filter enums.
+- **HPC and Module Environments**: In a standard desktop environment, CMake can often resolve CUDA targets automatically (e.g., `CUDA::npp`). However, deploying on an HPC cluster using Lmod (`module load cuda`) required linking specific, raw NPP libraries (`nppi`, `nppc`, `nppisu`, `nppicc`) and dynamically resolving the native GPU compute capability architectures.
+- **File I/O Limitations**: Initial attempts to natively support complex TIFF derivatives were rolled back due to the limitations of the STB library, highlighting the tradeoff between lightweight header-only libraries and full-scale imaging suites like LibTIFF.
+
+Final Considerations and Results
+
+CPU vs. GPU Equivalence
+
+The project successfully achieves functional equivalence between the CPU and GPU. Unit tests confirm that the math behaves identically; a pixel processed by the CPU Grayscale loop matches the output of the CUDA Grayscale thread. Edge cases, such as color channel saturation and math clamping in the Brightness and Sepia filters, are handled safely in both environments.
+
+Performance Observations
+
+- **CPU Strategy**: Relies on standard `for` loops iterating over a flattened 1D array of image data. While fine for small images, it bounds the execution time linearly to the number of pixels ($O(N)$).
+- **GPU Strategy**: Maps pixels (or individual bytes) to thousands of orthogonal CUDA threads. Custom kernels handle Grayscale and Sepia, while NVIDIA's NPP library handles Brightness via `nppiAddC` and `nppiSubC` with automatic saturation.
+- **Bottlenecks vs. Speedup**: The GPU implementation vastly outperforms the CPU on large images or batches. The theoretical GPU computation time is nearly instantaneous; the primary bottleneck shifts to memory transfers (Host-to-Device and Device-to-Host) over the PCIe bus and disk I/O.
+
+Overall, the project forms a robust, production-ready template that demonstrates the immense performance benefits of parallel computing for image processing.

@@ -1,0 +1,3 @@
+These are default images used for tests.
+
+DO NOT DELETE THESE IMAGES IF YOU WANT TO RUN THE TESTS!

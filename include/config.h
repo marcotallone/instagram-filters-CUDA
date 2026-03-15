@@ -1,0 +1,28 @@
+#pragma once
+
+#include <filesystem>
+#include <string>
+#include <unordered_set>
+
+namespace fs = std::filesystem;
+
+namespace config {
+
+// Paths / Directories
+inline const fs::path ROOT_PATH =
+    "/Users/marco/Projects/coursera/gpu_programming/GPU_Capstoneproject";
+inline const fs::path DATA_PATH = ROOT_PATH / "data";
+inline const fs::path IMAGES_PATH = ROOT_PATH / "images";
+inline const fs::path LOGS_PATH = ROOT_PATH / "logs";
+
+// Accepted image extensions
+inline const std::unordered_set<std::string> ACCEPTED_EXT = {
+    ".png", ".jpg", ".jpeg", ".tiff", ".tif"};
+
+inline const std::unordered_set<std::string> ACCEPTED_FILTERS = {
+    "grayscale", "sepia", "brightness"};
+}  // namespace config
+
+// Enum listing available filters types
+// Use it as:   Filter my_filter = Filter::SEPIA;
+enum class Filter { GRAYSCALE, SEPIA, BRIGHTNESS };

@@ -1,0 +1,66 @@
+# mtallone@gpu001 ~/Projects/instagram_filters $ ./scripts/runGPU.sh
+
+# GPU Image Filter
+
+Found 2 images in images/input
+
+Cleaning previous output directory...
+Applying grayscale filter...
+Finished processing 2 out of 2 images
+
+Applying sepia filter...
+Finished processing 2 out of 2 images
+
+Applying brightness +100 filter...
+Finished processing 2 out of 2 images
+
+Applying brightness -100 filter...
+Finished processing 2 out of 2 images
+
+Filtered images can be found in:
+
+- images/output/grayscaleGPU/
+- images/output/sepiaGPU/
+- images/output/brightness_plusGPU/
+- images/output/brightness_minusGPU/
+
+# mtallone@gpu001 ~/Projects/instagram_filters $ ./scripts/runCPU.sh
+
+# CPU Image Filter
+
+Found 2 images in images/input
+
+Applying grayscale filter...
+✓ mountain.jpg -> mountain_grayscale.jpg
+✓ Lena.png -> Lena_grayscale.png
+
+✅ Finished processing 2 out of 2 images
+Output saved to: images/output/grayscale
+
+Applying sepia filter...
+✓ mountain.jpg -> mountain_sepia.jpg
+✓ Lena.png -> Lena_sepia.png
+
+✅ Finished processing 2 out of 2 images
+Output saved to: images/output/sepia
+
+Applying brightness +100 filter...
+✓ mountain.jpg -> mountain_brightness.jpg
+✓ Lena.png -> Lena_brightness.png
+
+✅ Finished processing 2 out of 2 images
+Output saved to: images/output/brightness_plus
+
+Applying brightness -100 filter...
+✓ mountain.jpg -> mountain_brightness.jpg
+✓ Lena.png -> Lena_brightness.png
+
+✅ Finished processing 2 out of 2 images
+Output saved to: images/output/brightness_minus
+
+Filtered images can be found in:
+
+- images/output/grayscale/
+- images/output/sepia/
+- images/output/brightness_plus/
+- images/output/brightness_minus

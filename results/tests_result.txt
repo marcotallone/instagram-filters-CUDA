@@ -1,0 +1,69 @@
+Test project /u/dssc/mtallone/Projects/instagram_filters/build
+Start 1: ImageIOTest.LoadsPNGImage
+1/32 Test #1: ImageIOTest.LoadsPNGImage ......................... Passed 0.02 sec
+Start 2: ImageIOTest.LoadsJPGImage
+2/32 Test #2: ImageIOTest.LoadsJPGImage ......................... Passed 0.01 sec
+Start 3: ImageIOTest.ThrowsOnMissingDirectory
+3/32 Test #3: ImageIOTest.ThrowsOnMissingDirectory .............. Passed 0.00 sec
+Start 4: ImageIOTest.IgnoresUnsupportedFormats
+4/32 Test #4: ImageIOTest.IgnoresUnsupportedFormats ............. Passed 0.00 sec
+Start 5: CpuFilterTest.GrayscaleProducesValidOutput
+5/32 Test #5: CpuFilterTest.GrayscaleProducesValidOutput ........ Passed 0.01 sec
+Start 6: CpuFilterTest.GrayscalePureRedBecomesGray
+6/32 Test #6: CpuFilterTest.GrayscalePureRedBecomesGray ......... Passed 0.00 sec
+Start 7: CpuFilterTest.GrayscalePureGreenBecomesGray
+7/32 Test #7: CpuFilterTest.GrayscalePureGreenBecomesGray ....... Passed 0.00 sec
+Start 8: CpuFilterTest.GrayscalePureBlueBecomesGray
+8/32 Test #8: CpuFilterTest.GrayscalePureBlueBecomesGray ........ Passed 0.00 sec
+Start 9: CpuFilterTest.GrayscaleWhiteStaysWhite
+9/32 Test #9: CpuFilterTest.GrayscaleWhiteStaysWhite ............ Passed 0.02 sec
+Start 10: CpuFilterTest.GrayscaleBlackStaysBlack
+10/32 Test #10: CpuFilterTest.GrayscaleBlackStaysBlack ............ Passed 0.02 sec
+Start 11: CpuFilterTest.SepiaProducesValidOutput
+11/32 Test #11: CpuFilterTest.SepiaProducesValidOutput ............ Passed 0.01 sec
+Start 12: CpuFilterTest.SepiaProducesWarmTone
+12/32 Test #12: CpuFilterTest.SepiaProducesWarmTone ............... Passed 0.00 sec
+Start 13: CpuFilterTest.SepiaBlackStaysBlack
+13/32 Test #13: CpuFilterTest.SepiaBlackStaysBlack ................ Passed 0.02 sec
+Start 14: CpuFilterTest.SepiaDoesNotOverflow
+14/32 Test #14: CpuFilterTest.SepiaDoesNotOverflow ................ Passed 0.05 sec
+Start 15: CpuFilterTest.BrightnessProducesValidOutput
+15/32 Test #15: CpuFilterTest.BrightnessProducesValidOutput ....... Passed 0.01 sec
+Start 16: CpuFilterTest.BrightnessIncreasesPixels
+16/32 Test #16: CpuFilterTest.BrightnessIncreasesPixels ........... Passed 0.02 sec
+Start 17: CpuFilterTest.BrightnessDecreasesPixels
+17/32 Test #17: CpuFilterTest.BrightnessDecreasesPixels ........... Passed 0.02 sec
+Start 18: CpuFilterTest.BrightnessClampsAtMax
+18/32 Test #18: CpuFilterTest.BrightnessClampsAtMax ............... Passed 0.02 sec
+Start 19: CpuFilterTest.BrightnessClampsAtMin
+19/32 Test #19: CpuFilterTest.BrightnessClampsAtMin ............... Passed 0.02 sec
+Start 20: CpuFilterTest.BrightnessZeroDeltaDoesNothing
+20/32 Test #20: CpuFilterTest.BrightnessZeroDeltaDoesNothing ...... Passed 0.01 sec
+Start 21: CpuFilterTest.BrightnessDeltaClamped
+21/32 Test #21: CpuFilterTest.BrightnessDeltaClamped .............. Passed 0.01 sec
+Start 22: CpuFilterTest.ChainedFiltersWork
+22/32 Test #22: CpuFilterTest.ChainedFiltersWork .................. Passed 0.01 sec
+Start 23: CpuFilterTest.AllFiltersPreserveImageDimensions
+23/32 Test #23: CpuFilterTest.AllFiltersPreserveImageDimensions ... Passed 0.02 sec
+Start 24: CpuFilterTest.AllFiltersAllocateMemory
+24/32 Test #24: CpuFilterTest.AllFiltersAllocateMemory ............ Passed 0.02 sec
+Start 25: CpuFilterTest.FiltersHandleSmallImages
+25/32 Test #25: CpuFilterTest.FiltersHandleSmallImages ............ Passed 0.00 sec
+Start 26: CpuFilterTest.FiltersHandleLargeImages
+26/32 Test #26: CpuFilterTest.FiltersHandleLargeImages ............ Passed 0.02 sec
+Start 27: CpuFilterTest.BrightnessNegativeDeltaWorks
+27/32 Test #27: CpuFilterTest.BrightnessNegativeDeltaWorks ........ Passed 0.01 sec
+Start 28: CpuFilterTest.BrightnessMaxDeltaWorks
+28/32 Test #28: CpuFilterTest.BrightnessMaxDeltaWorks ............. Passed 0.01 sec
+Start 29: GpuFilterTest.GrayscaleKernelProducesOutput
+29/32 Test #29: GpuFilterTest.GrayscaleKernelProducesOutput ....... Passed 0.16 sec
+Start 30: GpuFilterTest.SepiaKernelProducesOutput
+30/32 Test #30: GpuFilterTest.SepiaKernelProducesOutput ........... Passed 0.15 sec
+Start 31: GpuFilterTest.BrightnessIncreasesPixels
+31/32 Test #31: GpuFilterTest.BrightnessIncreasesPixels ........... Passed 0.18 sec
+Start 32: GpuFilterTest.BrightnessClampsAtMax
+32/32 Test #32: GpuFilterTest.BrightnessClampsAtMax ............... Passed 0.20 sec
+
+100% tests passed, 0 tests failed out of 32
+
+Total Test time (real) = 1.06 se
