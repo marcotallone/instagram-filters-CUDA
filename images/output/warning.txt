@@ -1,0 +1,3 @@
+This is the defualt output directory to store filtered images.
+
+DO NOT DELETE THIS DIRECTORY IF YOU WANT TO HAVE A DEFAULT OUTPUT DIRECTORY!
